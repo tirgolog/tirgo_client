@@ -1,0 +1,28 @@
+<ion-content class="ion-padding ">
+  <main class="sel-lang">
+    <div class="logo-wrap" *ngIf="authService.isAuthenticated()">
+      <button class="top-back" (click)="back()">
+        <img src="assets/img/arrow-left.svg" alt="">
+      </button>
+      <img src="assets/logos/tirgo-logo.png" class="sel-lang__logo" alt="">
+    </div>
+    <div class="logo-wrap" *ngIf="!authService.isAuthenticated()">
+      <img src="assets/logos/tirgo-logo.png" class="sel-lang__logo" alt="">
+    </div>
+    <div class="sel-lang__main">
+      <p class="sel-lang__label">{{'Выберите язык интерфейса' | translate}}</p>
+      <button class="sel-lang__btn btn"  (click)="selectLanguage('en')">
+        <img src="/assets/flags/us.svg" alt="Картинка" />
+        English
+      </button>
+      <button class="sel-lang__btn btn"  (click)="selectLanguage('tr')">
+        <img src="/assets/flags/tr.svg" alt="Картинка" />
+        Türkçe
+      </button>
+      <button class="sel-lang__btn btn"  (click)="selectLanguage('ru')">
+        <img src="/assets/flags/ru.svg" alt="Картинка" />
+        Русский язык
+      </button>
+    </div>
+  </main>
+</ion-content>

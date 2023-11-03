@@ -1,0 +1,66 @@
+@import "base";
+
+.balance {
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+  &__main {
+    padding-top: 16px;
+    flex: 1 1 auto;
+  }
+  &__summ {
+    position: relative;
+    z-index: 2;
+    padding: rem(25);
+    height: rem(160);
+    border-radius: rem(8);
+    overflow: hidden;
+
+    margin-bottom: rem(30);
+
+    img {
+      margin-bottom: rem(30);
+    }
+
+    p {
+      font-size: rem(30);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: url("/assets/img/trucks.png") center / cover no-repeat;
+      z-index: -2;
+    }
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(#1c1a28, 0.8);
+      z-index: -1;
+    }
+  }
+  &__btn {
+  }
+}
+.my-footer{
+  padding: 20px;
+  background: #201e2a;
+  ion-toolbar{
+    --background: #201e2a;
+  }
+  ion-button{
+    --background: #403c5f;
+    height: 50px;
+  }
+}

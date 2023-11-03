@@ -1,0 +1,80 @@
+@import "base";
+
+.support {
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  header.header {
+    background: #1c1a28;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: rem(15) rem(10);
+  }
+  &__main {
+
+  }
+  &__messages {
+    padding: rem(5) 16px;
+    flex: 1 1 auto;
+
+    display: flex;
+    flex-direction: column;
+
+    overflow: auto;
+  }
+  &__message {
+    padding: rem(15);
+    border-radius: rem(10);
+    background: #252333;
+    color: #fff;
+    width: 75%;
+
+    margin-bottom: rem(10);
+    &._support {
+      text-align: left;
+      border-bottom-left-radius: 0;
+    }
+    &._client {
+      text-align: right;
+      margin-left: auto;
+      border-bottom-right-radius: 0;
+    }
+    small{
+      margin-top: 5px;
+      display: block;
+    }
+  }
+  &__input {
+    padding: rem(15);
+    background: #1c1a28;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+
+    &:has([class*="icm-"]) {
+      [class*="icm-"] {
+        position: static;
+      }
+
+      input {
+        padding-left: rem(20);
+        padding-right: rem(50);
+      }
+    }
+  }
+  &__submit {
+    display: flex;
+    position: absolute;
+    z-index: 2;
+    right: rem(15);
+    padding: rem(5);
+  }
+}

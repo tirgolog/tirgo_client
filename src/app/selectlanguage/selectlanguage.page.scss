@@ -1,0 +1,28 @@
+@import "base";
+
+.sel-lang {
+  &__logo {
+    margin-top: rem(100);
+    width: rem(250);
+  }
+  &__main {
+    margin-top: rem(200);
+
+    display: grid;
+    gap: rem(15);
+  }
+  &__label {
+    color: #fff;
+    font-size: rem(14);
+    margin-bottom: rem(15);
+  }
+  &__btn {
+    justify-content: flex-start;
+    background: #252333;
+    img {
+      border-radius: rem(5);
+      margin-right: rem(15);
+      width: 35px!important;
+    }
+  }
+}

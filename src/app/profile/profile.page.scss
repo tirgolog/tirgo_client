@@ -1,0 +1,40 @@
+@import "base";
+
+.profile {
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+  &__main {
+    display: grid;
+    align-items: start;
+    align-content: space-between;
+    flex: 1 1 auto;
+  }
+  &__photo {
+    margin: rem(20) 0;
+
+    display: flex;
+    align-items: center;
+    img {
+      width: rem(90);
+      height: rem(90);
+      object-fit: cover;
+      border-radius: 50%;
+
+      margin-right: rem(20);
+    }
+    span {
+      color: #403c61;
+      font-weight: 600;
+    }
+  }
+  &__inputs {
+  }
+  &__text {
+    color: #47484f;
+    padding: rem(20) 0;
+  }
+  &__btn {
+  }
+}

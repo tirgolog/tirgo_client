@@ -1,0 +1,47 @@
+<ion-content class="ion-padding">
+  <main class="payment">
+    <header class="header">
+      <button class="header__left" (click)="back()">
+        <i class="icm-arrow"></i>
+      </button>
+      <p class="header__title">{{'Оплата' | translate}}</p>
+    </header>
+    <section class="payment__main">
+      <div class="pay-method">
+        <p class="pay-method__title">{{'Методы оплаты' | translate}}</p>
+        <div class="pay-method__items">
+          <button class="pay-method__item">
+            <img src="/assets/img/uzcard.svg" alt="Картинка" />
+          </button>
+          <button class="pay-method__item">
+            <img src="/assets/img/visa.svg" alt="Картинка" />
+          </button>
+        </div>
+      </div>
+      <div class="payment__data">
+        <label class="form__group">
+          <span class="form__label">Номер карты</span>
+          <div class="form__input">
+            <input type="text" placeholder="Введите номер карты" />
+          </div>
+        </label>
+        <div class="payment__row">
+          <label class="form__group">
+            <span class="form__label">Срок действия</span>
+            <div class="form__input">
+              <input type="text" placeholder="до 27.05.2028" />
+            </div>
+          </label>
+          <label class="form__group">
+            <span class="form__label">CVV</span>
+            <div class="form__input">
+              <input type="text" placeholder="123124" />
+            </div>
+          </label>
+        </div>
+      </div>
+    </section>
+    <button class="payment__btn btn">Оплатить</button>
+  </main>
+
+</ion-content>

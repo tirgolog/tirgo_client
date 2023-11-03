@@ -1,0 +1,44 @@
+<ion-header>
+  <div class="wrapper-fluid-header">
+    <div class="logo-wrap personal-head">
+      <button class="top-back" (click)="back()"><img src="assets/img/arrow-left.svg" alt=""></button>
+      <h2>{{'Профиль' | translate}}</h2>
+      <div></div>
+    </div>
+  </div>
+</ion-header>
+<ion-content class="ion-padding">
+  <main class="profile">
+    <div class="profile__photo" (click)="cropUpload()">
+      <img [src]="authService.currentUser?.avatar" alt="Картинка" />
+      <span>{{'Изменить фото' | translate}}</span>
+    </div>
+    <section class="profile__main form">
+      <div class="profile__inputs">
+        <label class="form__group">
+          <span class="form__label">{{'Укажите Ваше ФИО' | translate}}</span>
+          <div class="form__input">
+            <input type="text" placeholder="{{'Укажите Ваше ФИО' | translate}}" readonly [(ngModel)]="name" />
+          </div>
+        </label>
+        <label class="form__group">
+          <span class="form__label">{{'Номер телефона' | translate}}</span>
+          <div class="form__input">
+            <input type="text" readonly placeholder="{{'Номер телефона' | translate}}" mask="000 (000) 000 00 00" [(ngModel)]="phone" />
+          </div>
+        </label>
+        <label class="form__group">
+          <span class="form__label">{{'Укажите ваш регион' | translate}}</span>
+          <div class="form__input" (click)="selectRegion()">
+            <input type="text" readonly placeholder="{{'Укажите ваш регион' | translate}}" [value]="country + ' г. ' + city"/>
+          </div>
+        </label>
+        <p class="profile__text">
+          {{'Для изменения номер ателефона и имени пользователя обратитесь в службу поддержки.' | translate}}
+        </p>
+      </div>
+      <!--<button class="profile__btn btn">Изменить</button>-->
+    </section>
+  </main>
+
+</ion-content>

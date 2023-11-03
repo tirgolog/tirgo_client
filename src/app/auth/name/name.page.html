@@ -1,0 +1,32 @@
+<ion-content class="ion-padding">
+  <article class="reg-profile">
+    <img src="/assets/logos/tirgo-logo.png" class="reg-profile__logo" alt="Картинка" />
+    <section class="reg-profile__main form">
+      <div class="reg-profile__photo" (click)="cropUpload()">
+        <img [src]="authService.currentUser?.avatar" alt="Картинка" />
+        <span>{{'Добавить фото' | translate}}</span>
+      </div>
+      <div class="reg-profile__inputs">
+        <label class="form__group">
+          <span class="form__label">{{'Укажите Ваше ФИО' | translate}}</span>
+          <div class="form__input">
+            <input type="text" placeholder="{{'Укажите Ваше ФИО' | translate}}" [(ngModel)]="name"/>
+          </div>
+        </label>
+        <label class="form__group" (click)="selectRegion()">
+          <span class="form__label">{{'Укажите ваш регион' | translate}}</span>
+          <div class="form__input">
+            <input type="text" readonly placeholder="{{'Укажите ваш регион' | translate}}" [value]="country + ' г' + city"/>
+          </div>
+        </label>
+      </div>
+      <p class="reg-profile__text">
+        {{'Чтобы изменить номер телефона, вам необходимо создать новый аккаунт, или обратиться в службу поддержки' | translate}}
+      </p>
+      <button class="reg-profile__btn btn" (click)="regUser()">
+        {{'Зарегистрироваться' | translate}} <i class="icm-arrow"></i>
+      </button>
+    </section>
+  </article>
+
+</ion-content>

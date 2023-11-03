@@ -1,0 +1,114 @@
+<ion-content class="full-height">
+  <div class="menu">
+    <div class="main-menu" *ngIf="authService.isAuthenticated()">
+      <div class="menu-head">
+        <img class="avatar" [src]="authService.currentUser?.avatar" alt="">
+        <div class="menu-head-right">
+          <h3>{{authService.currentUser?.name}}</h3>
+          <div class="menu-head-right-row">
+            <div class="menu-rate">
+              <img src="assets/img/star.svg" alt="">
+              <span>{{authService.currentUser?.raiting}}</span>
+            </div>
+            <div class="user-id">ID: {{authService.currentUser?.id}}</div>
+          </div>
+          <button class="my-profile" (click)="goTo('/profile/',false)">{{'Мой профиль' | translate}} <img src="assets/img/Edit.svg" alt=""></button>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <button (click)="goTo('/tabs/home/',true)"><ion-icon src="assets/img/main.svg"></ion-icon>{{'Главная' | translate}}</button>
+        <!--<button (click)="goTo('/mysubscribers/',false)"><ion-icon src="assets/img/Document.svg"></ion-icon>Мои подписки</button>-->
+        <button (click)="goTo('/tabs/archive/',true)"><ion-icon src="assets/img/Calendar2.svg"></ion-icon>{{'Архив заказов' | translate}}</button>
+        <button (click)="goTo('/balance/',false)"><ion-icon src="assets/img/balans.svg"></ion-icon>{{'Мой баланс' | translate}}</button>
+        <!--<button (click)="updateLocation()">
+          <ion-icon name="navigate-circle-outline"></ion-icon>
+          <span class="location-detect">
+            {{'Обновить геолокацию' | translate}} <br>
+            <small>{{authService.cityinfo}}</small>
+          </span>
+        </button>-->
+        <button (click)="goTo('/support/',false)">
+          <ion-icon src="assets/img/chat.svg"></ion-icon>{{'Служба поддержки' | translate}}
+        </button>
+        <button (click)="goTo('/selectlanguageauth/',false)">
+          <ion-icon src="assets/img/language.svg"></ion-icon>Язык интерфейса
+        </button>
+        <button (click)="authService.goToSupport()">
+          <ion-icon src="assets/img/tg.svg"></ion-icon>{{'Telegram' | translate}}
+        </button>
+        <!--<button><img src="assets/img/chat.svg" alt="">Мой статус</button>-->
+        <button (click)="logOut()">
+          <ion-icon src="assets/img/Logout.svg"></ion-icon>
+          {{'Выход' | translate}}
+        </button>
+      </nav>
+    </div>
+  </div>
+  <!--<ion-modal [isOpen]="modalExit"  (willDismiss)="closeModal()" class="modal-append-order">
+    <ng-template>
+      <div class="code-error personal-modal filter-modal">
+        <div class="code-error-wrap">
+          <img src="assets/logos/tirgo-logo.png" alt="">
+          <h2 class="ion-no-margin ion-no-padding">{{'Вы действительно хотите выйти?' | translate}}</h2>
+          <div class="filter-modal-action">
+            <button (click)="logOutFull()"><b>{{'Да' | translate}}</b></button>
+            <button (click)="closeModal()">{{'Нет' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ion-modal>-->
+</ion-content>
+
+
+
+<!--
+<ion-content>
+  <div class="menu">
+    <div class="menu__profile profile-menu">
+      <img
+              [src]="authService.currentUser?.avatar"
+              class="profile-menu__img"
+              alt="Картинка"
+      />
+      <div class="profile-menu__content" *ngIf="authService.currentUser">
+        <p class="profile-menu__name" (click)="goTo('/profile',false)">{{authService.currentUser.name}}</p>
+        <div class="profile-menu__row">
+          <div class="profile-menu__rating">
+            <img src="/assets/img/star.svg" alt="Картинка" />
+            <span (click)="goTo('/profile',false)">{{authService.currentUser.raiting}}</span>
+          </div>
+          <div class="profile-menu__id" (click)="goTo('/profile',false)">ID: {{authService.currentUser.id}}</div>
+        </div>
+        <button class="profile-menu__edit" (click)="goTo('/profile',false)">
+          {{'Профиль' | translate}} <i class="icm-edit"></i>
+        </button>
+      </div>
+    </div>
+    <div class="menu__links">
+      &lt;!&ndash;<div class="profile-menu__date">
+        <i class="icm-circle"></i>
+        Подписка до 10.03.23
+      </div>&ndash;&gt;
+      <button class="menu__link" (click)="goTo('/tabs/home/',true)">
+        <i class="icm-menu-home"></i> {{'Главная' | translate}}
+      </button>
+      &lt;!&ndash;<button class="menu__link" (click)="goTo('/subscribes',false)">
+        <i class="icm-document"></i> Мои подписки
+      </button>&ndash;&gt;
+      <button class="menu__link" (click)="goTo('/tabs/orders/',true)">
+        <i class="icm-menu-calendar"></i> {{'Архив заказов' | translate}}
+      </button>
+      <button class="menu__link" (click)="goTo('/balance',false)">
+        <i class="icm-cash"></i> Мой баланс
+      </button>
+      <button class="menu__link" (click)="authService.goToSupport()">
+        <ion-icon src="assets/img/chat.svg"></ion-icon> {{'Служба поддержки' | translate}}
+      </button>
+    </div>
+    <div class="menu__logout" (click)="logOutFull()">
+      <button class="menu__link"><i class="icm-logout"></i> {{'Выход' | translate}}</button>
+    </div>
+  </div>
+</ion-content>
+-->

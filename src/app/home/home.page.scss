@@ -1,0 +1,15 @@
+@import "base";
+
+//.fixed{
+//  position: fixed;
+//  width: calc(100% - 32px);
+//  background: #1c1a28;
+//}
+.no-items{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  color: white;
+  font-size: 20px;
+}

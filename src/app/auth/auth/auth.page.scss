@@ -1,0 +1,119 @@
+@import "base";
+
+.auth {
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+  &__logo {
+    width: rem(220);
+    margin: rem(20) 0 rem(50);
+  }
+  &__main {
+    display: grid;
+  }
+  &__inputs {
+    margin-bottom: rem(20);
+  }
+  &__wrong-text {
+    color: #d92e2e;
+    padding: rem(5) 0;
+    font-weight: 500;
+  }
+  &__submit {
+    height: rem(60);
+    font-size: rem(18);
+    font-style: italic;
+
+    margin-bottom: rem(25);
+  }
+  &__forgot {
+    text-align: center;
+    color: #fff;
+    font-size: rem(16);
+    & + span {
+      color: #fff;
+      font-size: rem(18);
+      padding: rem(15) 0;
+      text-align: center;
+    }
+  }
+  &__restore {
+    border-bottom: rem(1) dashed;
+    margin-left: rem(5);
+  }
+  &__support {
+    &:has(.icm-support) {
+      i.icm-support {
+        font-size: rem(24);
+        font-weight: 300;
+        margin-right: rem(10);
+      }
+    }
+  }
+}
+
+.input-mode-tel{
+  span{
+    width: 80px;
+    background: #413f4f;
+    color: white;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-content: center;
+    position: absolute;
+    height: 56px;
+    border-radius: 4px 0 0 4px;
+  }
+  input{
+    margin-left: 70px;
+    width: calc(100% - 70px);
+  }
+  label{
+    display: block;
+    margin-top: 15px!important;
+    margin-bottom: 15px!important;
+  }
+  margin-right: 10px;
+}
+.input-code{
+  display: block!important;
+  label{
+    display: block;
+    margin-bottom: 10px;
+    color: white!important;
+  }
+}
+.agroinput{
+  background: #1c1a28;
+  --background: #1c1a28;
+  margin-bottom: 10px;
+  ion-label{
+    margin-left: 10px;
+    color: white;
+    a{
+      color: white;
+    }
+  }
+  ion-checkbox{
+    --background: #262434;
+  }
+}
+.btn-orange{
+  margin-bottom: 10px;
+}
+
+.resend-sms{
+  display: block;
+  color: white;
+  margin-top: 10px;
+}
+
+.agroinput ion-checkbox {
+  --background: white!important;
+  --background-checked: #ed901e;
+}

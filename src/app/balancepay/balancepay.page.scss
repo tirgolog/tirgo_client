@@ -1,0 +1,32 @@
+@import "base";
+
+.payment {
+  flex: 1 1 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  .form__group {
+    margin-top: 0;
+  }
+  &__main {
+    padding-top: rem(30);
+    display: flex;
+    flex-direction: column;
+
+    gap: rem(20);
+
+    flex: 1 1 auto;
+  }
+  &__data {
+    display: grid;
+    gap: rem(20);
+  }
+  &__row {
+    margin-bottom: 16px;
+    display: flex;
+    gap: rem(10);
+  }
+  &__btn {
+  }
+}

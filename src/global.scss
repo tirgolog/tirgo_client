@@ -1,0 +1,314 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+@import "base";
+
+// &display=swap
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,regular,500,600,700,800,900,700italic&display=swap");
+
+$fontFamily: "Montserrat";
+$fontSize: rem(14);
+
+@import "assets/scss/reset";
+@import "assets/scss/icons";
+
+body{
+  background: #1c1a28;
+}
+.by-realweb{
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom) + 30px);
+  text-align: center;
+  width: 100%;
+  img{
+    height: 25px;
+    width: 50px;
+  }
+}
+ion-content{
+  --background: #1c1a28;
+}
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #1c1a28;
+
+  padding: rem(15);
+  #main {
+    flex: 1 1 auto;
+
+    display: flex;
+    flex-direction: column;
+  }
+  > * {
+    min-width: 0;
+  }
+}
+
+#map {
+  position: relative;
+  overflow: hidden;
+  iframe {
+    position: relative;
+    width: 100%;
+  }
+}
+
+@import "buttons";
+@import "header";
+@import "form";
+@import "modal";
+@import "order";
+@import "tab";
+@import "pay-method";
+/*
+[class*="__container"] {
+   max-width: rem($containerWidth);
+   box-sizing: content-box;
+   margin: 0 auto;
+   padding: 0 rem(math.div($containerPadding, 2));
+}
+*/
+
+.modal-phone-select-code{
+  ion-content{
+    --ion-background-color:#1e1c29;
+  }
+  h2{
+    color: white;
+  }
+  p{
+    color: white;
+  }
+}
+
+.phone-code-select{
+  margin-bottom: 30%;
+  ion-searchbar{
+    color: white;
+    background: #1e1c29;
+  }
+  .list-phone-code{
+    margin-top: 60px;
+    margin-bottom: 55%;
+    .flag-phone{
+      display: flex;
+      width: 100%;
+      height: 100%;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: center;
+      font-size: 2em;
+    }
+    ion-item{
+      margin-bottom: 10px;
+      ion-label{
+        margin-left: 10px;
+      }
+    }
+  }
+}
+ion-menu::part(container) {
+  border-radius: 0 8px 8px 0;
+}
+ion-tab-bar{
+  height: 70px;
+  border-top: 0;
+  padding: 0 12px calc(env(safe-area-inset-bottom) + 12px) 12px;
+  background-color: #1C1A28;
+  box-shadow: 0px -1px 6px rgba(35, 31, 32, 0.1);
+  ion-tab-button{
+    background-color: #252333;
+    ion-icon{
+      margin-top: 7px;
+      margin-bottom: 7px;
+      font-size: 2.4em;
+    }
+  }
+  ion-tab-button:first-child{
+    border-radius: 8px 0 0 8px;
+  }
+  ion-tab-button:last-child{
+    border-radius: 0 8px 8px 0;
+  }
+}
+
+ion-tab-button {
+  --color:#47484F;
+  --color-selected: #ffffff;
+  ion-icon{
+    fill: black;
+  }
+}
+.noItem{
+  display: flex;
+  align-items: center;
+  position: fixed;
+  left: 0;
+  height: 85vh;
+  width: 100%;
+  text-align: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  img{
+    width: 30%;
+    margin-bottom: 15px;
+    color: white;
+  }
+  ion-icon{
+    font-size: 6em;
+    color: white;
+  }
+  p{
+    margin-top: 20px;
+    width: 60%;
+    font-size: 15px;
+    color: white;
+    font-weight: 400;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+}
+.with-out-header{
+   padding-top: env(safe-area-inset-top)!important;
+}
+
+.loadingspinner {
+  --color: #fff !important;
+}
+.wrapper-fluid-header{
+  padding-top: env(safe-area-inset-top) !important;
+  width: 100%;
+  height: 80px;
+  min-height: 80px;
+  background-color: #1C1A28;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+}
+.wrapper-fluid-header .logo-wrap {
+  height: 180px;
+}
+.wrapper-fluid-header .personal-head {
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  height: fit-content;
+  padding-top: 0;
+  h2{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 16px;
+    color: #FFFFFF;
+  }
+}
+
+.logo-wrap {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: self-start;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.top-back {
+  background-color: transparent;
+  margin-bottom: 30px;
+  padding: 0;
+}
+.personal-head .top-back {
+  margin-bottom: 0;
+}
+:host .calendar-body .calendar-month .calendar-month-grid {
+  height: 100%!important;
+}
+
+.custom-action-sheet{
+  .action-sheet-group{
+    background: var(--ion-color-primary);
+    button{
+      color: white;
+    }
+  }
+  .cancel-action-sheet{
+    color: var(--ion-color-primary) !important;
+  }
+}
+.myitem{
+  background: #1C1A28;
+  --background: #1C1A28;
+  color: white;
+}
+:host .calendar-action-buttons ion-item{
+  color: white!important;
+}
+.no-margin{
+  margin: 0!important;
+}
+.customAlert {
+  --background: #1e1c29;
+  .alert-wrapper{
+    box-shadow: 0px 0px 23px 0px rgba(255, 255, 255, 0.2);
+    .alert-button{
+      color: white;
+    }
+    .alert-head{
+      h2{
+        color: white;
+      }
+    }
+    .alert-message{
+      color: white;
+    }
+    .alert-radio-group{
+      button{
+        .alert-radio-label{
+          color: grey;
+        }
+      }
+      button[aria-checked="true"]{
+        .alert-radio-label{
+          color: white;
+          font-weight: 600;
+        }
+      }
+    }
+    .alert-button-group{
+      button{
+        color: white;
+      }
+    }
+  }
+}

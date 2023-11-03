@@ -1,0 +1,51 @@
+@import "base";
+
+.subscrip {
+  &__main {
+    padding-top: rem(40);
+    display: grid;
+    gap: rem(10);
+  }
+  &__item {
+  }
+}
+
+.item-subscrip {
+  background: #252333;
+  border-radius: rem(8);
+  &__header {
+    width: 100%;
+    background: #252333;
+
+    &._spoller-active {
+      .icm-chevron {
+        transform: rotateX(180deg);
+      }
+    }
+    .icm-chevron {
+      transition: all 0.2s ease 0s;
+      font-size: rem(10);
+      margin-left: auto;
+    }
+  }
+  &__body {
+    padding: rem(15);
+    color: #fff;
+  }
+  &__date {
+    font-weight: 700;
+    margin-bottom: rem(5);
+  }
+  &__text {
+    margin-bottom: rem(20);
+  }
+  &__group {
+    display: grid;
+    gap: rem(10);
+    &:not(:last-child) {
+      margin-bottom: rem(25);
+    }
+  }
+  &__btn {
+  }
+}

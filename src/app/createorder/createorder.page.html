@@ -1,0 +1,231 @@
+<app-header></app-header>
+<ion-content class="ion-padding">
+  <main class="order-new">
+    <section class="order-new__main">
+      <div class="order-new__locates">
+        <label class="form__group">
+          <div class="form__input" (click)="selectStartLocation()">
+            <i class="icm-locate"></i>
+            <input type="text" placeholder="{{'Место отправки груза' | translate}}" readonly [(ngModel)]="data.city_start"/>
+          </div>
+        </label>
+        <label class="form__group">
+          <div class="form__input" (click)="selectFinishLocation()">
+            <i class="icm-flag"></i>
+            <input type="text" placeholder="{{'Место доставки груза' | translate}}" readonly [(ngModel)]="data.city_finish"/>
+          </div>
+        </label>
+      </div>
+      <div class="order-new__group">
+        <h4 class="order-new__title">{{'Дата и время отправки груза' | translate}} *</h4>
+        <div class="order-new__dates">
+          <label class="form__group">
+            <div class="form__input" id="selectdate">
+              <i class="icm-calendar"></i>
+              <input type="text" placeholder="_ _/_ _/_ _ _ _" [value]="data.date_start | formatTime:'DD/MM/YYYY'"/>
+            </div>
+          </label>
+          <ion-modal trigger="selectdate" [cssClass]="'bottom-end'">
+            <ng-template>
+              <ion-datetime
+                      class="custom-calendar"
+                      #startDate
+                      [showDefaultTitle]="true"
+                      [preferWheel]="true"
+                      presentation="date"
+                      firstDayOfWeek="1"
+                      [value]="data.date_start | formatTime:'YYYY-MM-DD'"
+                      size="cover"
+                      doneText="Выбрать"
+                      cancelText="Отмена"
+                      [min]="curDate"
+                      [showDefaultButtons]="true"
+                      (ionChange)="selectDateStart(startDate.value)"
+              >
+                <span slot="title" style="color: white">{{'Выберите дату отправления груза' | translate}}</span>
+              </ion-datetime>
+            </ng-template>
+          </ion-modal>
+          <label class="form__group">
+            <div class="form__input" id="selecttime">
+              <i class="icm-time"></i>
+              <input type="text" placeholder="_ _ : _ _"  [value]="data.date_start | formatTime:'HH:mm'"/>
+            </div>
+          </label>
+          <ion-modal trigger="selecttime" [cssClass]="'bottom-end'">
+            <ng-template>
+              <ion-datetime
+                      #startTime
+                      presentation="time"
+                      [value]="data.date_start | formatTime:'HH-mm'"
+                      size="cover"
+                      doneText="Выбрать"
+                      cancelText="Отмена"
+                      class="pickertime"
+                      [showDefaultButtons]="true"
+                      (ionChange)="selectTimeStart(startTime.value)"
+              ></ion-datetime>
+            </ng-template>
+          </ion-modal>
+        </div>
+      </div>
+      <div class="order-new__group">
+        <h4 class="order-new__title">{{'Срочность заказа' | translate}}*</h4>
+        <div class="order-new__checks">
+          <label class="order-new__check" (click)="data.add_two_days = false">
+            <input type="radio" name="orderNewCheck" [checked]="!data.add_two_days"/>
+            <span>{{'Срочный' | translate}}</span>
+          </label>
+          <label class="order-new__check" (click)="data.add_two_days = true">
+            <input type="radio" name="orderNewCheck" [checked]="data.add_two_days"/>
+            <span>{{'+2 дня' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <ion-item class="ion-no-margin ion-no-padding myitem" lines="none">
+        <ion-label>{{'ADR (перевозка опасных грузов)' | translate}}</ion-label>
+        <ion-toggle color="success" slot="end" [checked]="data.adr" (ionChange)="setAdr($event)"></ion-toggle>
+      </ion-item>
+      <ion-item class="ion-no-margin ion-no-padding myitem" lines="none">
+        <ion-label>{{'Безналичная оплата' | translate}}</ion-label>
+        <ion-toggle color="success" slot="end" [checked]="data.no_cash" (ionChange)="setNoCash($event)"></ion-toggle>
+      </ion-item>
+      <h4 class="order-new__title no-margin">{{'Валюта' | translate}}</h4>
+      <div class="order-new__weight" (click)="selectCurrency()">
+        <label class="form__group">
+          <div class="form__input">
+            <input type="text" inputmode="tel" placeholder="Введите валюту" readonly [(ngModel)]="data.currency"/>
+          </div>
+        </label>
+      </div>
+      <h4 class="order-new__title no-margin">{{'Предлагаемая цена' | translate}}</h4>
+      <div class="order-new__weight">
+        <label class="form__group">
+          <div class="form__input">
+            <input type="text" inputmode="tel" onpaste="return false;" placeholder="{{'Предлагаемая цена' | translate}}" [(ngModel)]="data.price" (input)="calcSafePrice()"/>
+          </div>
+        </label>
+      </div>
+      <small class="info" *ngIf="data.secure_transaction">Цена с учетом безопасной сделки {{priceSafe}} {{data.currency}}.</small>
+      <ng-container *ngIf="data.price && data.price !== ''">
+        <ion-item class="ion-no-margin ion-no-padding myitem" lines="none">
+          <ion-label>{{'Безопасная сделка' | translate}}</ion-label>
+          <ion-toggle color="success" slot="end" [checked]="data.secure_transaction" (ionChange)="setSecureTrans($event)"></ion-toggle>
+        </ion-item>
+        <small class="info">Безопасная сделка подразумевает удерживание средств с вашего счета до момента завершения заказа. При завершении заказа средства поступят на счет водителя.</small>
+        <ion-item class="ion-no-margin ion-no-padding myitem" lines="none" *ngIf="data.secure_transaction">
+          <ion-label>{{'Страхование груза' | translate}}</ion-label>
+          <ion-toggle color="success" slot="end" [checked]="insuraance" (ionChange)="setInsuraance($event)"></ion-toggle>
+        </ion-item>
+        <small class="info" *ngIf="data.secure_transaction">Страховая компания которая страхует груз АО КЭИС "Узбекинвест"</small>
+      </ng-container>
+      <div class="order-new__group">
+        <h4 class="order-new__title">{{'Тип груза' | translate}} *</h4>
+        <div class="order-new__weight">
+          <label class="form__group" (click)="selectTypeCargo()">
+            <div class="form__input">
+              <input type="text" readonly placeholder="{{'Выберите тип груза' | translate}}" [value]="returnNameCargoType(data.typecargo)"/>
+            </div>
+          </label>
+        </div>
+        <h4 class="order-new__title">{{'Вес груза (кг)' | translate}} *</h4>
+        <div class="order-new__weight">
+          <label class="form__group">
+            <div class="form__input">
+              <input type="text" inputmode="tel" onpaste="return false;" placeholder="{{'Введите вес (кг)' | translate}}" max="5" [(ngModel)]="data.weight"/>
+            </div>
+          </label>
+        </div>
+        <!--<h4 class="order-new__title">Выберите валюта</h4>
+        <div class="order-new__weight">
+          <label class="form__group">
+            <div class="form__input">
+              <input type="text" inputmode="tel" placeholder="Валюта" [(ngModel)]="data.currency"/>
+            </div>
+          </label>
+        </div>-->
+      </div>
+      <div class="order-new__group">
+        <h4 class="order-new__title">{{'Габариты груза (см)' | translate}}</h4>
+        <div class="order-new__dimens">
+          <label class="form__group">
+            <div class="form__input">
+              <input type="text" inputmode="tel" onpaste="return false;" placeholder="{{'Длина' | translate}}" [(ngModel)]="data.length_box"/>
+            </div>
+          </label>
+          <i class="icm-close"></i>
+          <label class="form__group">
+            <div class="form__input">
+              <input type="text" inputmode="tel" onpaste="return false;" placeholder="{{'Ширина' | translate}}" [(ngModel)]="data.width_box"/>
+            </div>
+          </label>
+          <i class="icm-close"></i>
+          <label class="form__group">
+            <div class="form__input">
+              <input type="text" inputmode="tel" onpaste="return false;" placeholder="{{'Высота' | translate}}" [(ngModel)]="data.height_box"/>
+            </div>
+          </label>
+        </div>
+      </div>
+      <div class="order-new__group">
+        <h4 class="order-new__title">{{'Выберите тип транспорта' | translate}}</h4>
+        <div class="order-new__types">
+          <ng-container *ngFor="let row of authService.typetruck">
+            <button class="order-new__type" [ngClass]="findTypes(row.id)  ? '_active':''" (click)="setTransportTypes(row)">
+              <span class="block-check"></span>
+              <h4 class="ion-no-padding ion-no-padding">{{row.name}} <br> <small>{{'До' | translate}} {{row.weight}} {{'кг' | translate}}.</small></h4>
+            </button>
+          </ng-container>
+         <!-- <ng-container *ngFor="let row of authService.typetruck">
+            <button class="order-new__type" [ngClass]="data.typetransport === row.id ? '_active':''" (click)="setTransportType(row)">
+              <span class="block-check"></span>
+              <h4 class="ion-no-padding ion-no-padding">{{row.name}} <br> <small>{{'До' | translate}} {{row.weight}} {{'кг' | translate}}.</small></h4>
+            </button>
+          </ng-container>-->
+        </div>
+      </div>
+      <div class="order-new__group" *ngIf="mode">
+        <h4 class="order-new__title ion-no-margin ion-no-padding">
+          {{'Режим' | translate}}
+        </h4>
+        <div class="order-new__checks">
+          <label class="order-new__check" (click)="data.mode = true">
+            <input type="radio" [checked]="data.mode"/>
+            <span>{{'С режимом' | translate}}</span>
+          </label>
+          <label class="order-new__check" (click)="data.mode = false">
+            <input type="radio" [checked]="!data.mode"/>
+            <span>{{'Без режима' | translate}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="order-new__group" *ngIf="cubic && cubic.length">
+        <h4 class="order-new__title ion-no-margin ion-no-padding">
+          {{'Выберите кубатуру' | translate}}
+        </h4>
+        <div class="order-new__checks">
+          <label class="order-new__check" *ngFor="let row of cubic">
+            <input type="radio" [name]="row" (change)="data.cubic = row" [checked]="data.cubic === row"/>
+            <span>{{row}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="order-new__group" *ngIf="loading && loading.length">
+        <h4 class="order-new__title ion-no-margin ion-no-padding">
+          {{'Выберите погрузку' | translate}}
+        </h4>
+        <div class="order-new__checks">
+          <label class="order-new__check" *ngFor="let row of loading">
+            <input type="radio" [name]="row" (change)="data.loading = row" [checked]="data.loading === row"/>
+            <span>{{row}}</span>
+          </label>
+        </div>
+      </div>
+      <div class="order-new__btns">
+        <button class="order-new__btn btn-sec" (click)="clearOrder()">{{'Очистить' | translate}}</button>
+        <button class="order-new__btn btn" [disabled]="loadingCreateOrder" (click)="createOrder()">{{'Создать' | translate}}</button>
+      </div>
+    </section>
+  </main>
+
+</ion-content>

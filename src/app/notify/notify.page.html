@@ -1,0 +1,31 @@
+<ion-header>
+  <div class="wrapper-fluid-header">
+    <div class="logo-wrap personal-head">
+      <button class="top-back" (click)="back()"><img src="assets/img/arrow-left.svg" alt=""></button>
+      <h2>{{'Уведомления' | translate}}</h2>
+      <div></div>
+    </div>
+  </div>
+</ion-header>
+<ion-content class="ion-padding">
+  <main class="notifs">
+    <div *ngIf="authService.notifications && authService.notifications.length === 0" class="noItem">
+      <ion-icon src="assets/img/wrong.svg"></ion-icon>
+      <p>{{'К сожалению у вас нет новых уведомлений' | translate}}.</p>
+    </div>
+    <section class="notifs__main">
+      <div class="notifs__group">
+        <div class="notifs__items" *ngFor="let row of authService.notifications">
+          <div class="notifs__item item-notifs">
+            <h2 class="ion-no-margin ion-no-padding">{{row.header}}</h2>
+            <p class="item-notifs__text">
+              {{row.text}}
+            </p>
+            <small>{{row.date | formatTime: 'DD MMMM YYYY в HH:mm'}}</small>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+</ion-content>

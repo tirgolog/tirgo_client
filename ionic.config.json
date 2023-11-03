@@ -1,0 +1,7 @@
+{
+  "name": "tirgoclient",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

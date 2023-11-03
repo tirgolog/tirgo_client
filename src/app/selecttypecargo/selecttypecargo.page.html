@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{'Выберите тип груза' | translate}}</ion-title>
+    <ion-button slot="end">
+      <ion-label (click)="close()">{{'Закрыть' | translate}}</ion-label>
+    </ion-button>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar placeholder="Custom Placeholder"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let row of items" (click)="selectTypeCargo(row)" >
+      <ion-label>
+        <h2>{{row.name}}</h2>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

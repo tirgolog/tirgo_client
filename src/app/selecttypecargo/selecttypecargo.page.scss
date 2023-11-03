@@ -1,0 +1,24 @@
+ion-header{
+  ion-toolbar{
+    --background: #1C1A28;
+    color: white;
+  }
+}
+ion-list{
+  --background: #1C1A28;
+  background: #1C1A28;
+  ion-item{
+    border-radius: 10px;
+    border: 1px solid white;
+    margin-left: 15px;
+    margin-right: 15px;
+    padding-top: 14px;
+    padding-bottom: 15px;
+    --background: #1C1A28;
+    color: white;
+    margin-bottom: 10px;
+    ion-label{
+      white-space: normal;
+    }
+  }
+}

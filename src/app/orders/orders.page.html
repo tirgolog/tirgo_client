@@ -1,0 +1,80 @@
+<app-header></app-header>
+<ion-content class="ion-padding">
+  <main class="archive">
+    <section class="archive__main">
+      <ng-container *ngFor="let row of authService.myorders">
+        <article class="order" *ngIf="row.status === 2">
+          <div class="order__header">
+            <div class="order__title">
+              <!--<img src="/assets/img/status/succes.svg" alt="Картинка" />-->
+              №{{authService.addLeadingZeros(row.id)}}
+            </div>
+            <div class="order__locates">
+              <div class="order__locate">
+                <i class="icm-locate"></i>
+                <p>
+                  <span>{{'Отправка из' | translate}}</span> <br />
+                  {{row.route.from_city}}
+                </p>
+              </div>
+              <div class="order__locate">
+                <i class="icm-flag"></i>
+                <p>
+                  <span>{{'Доставка в' | translate}}</span> <br />
+                  {{row.route.to_city}}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="order__main">
+            <div class="order__infos">
+              <p class="order__info">
+                <span>{{'Время отправки' | translate}}</span>
+                <b>{{row.date_send | formatTime: 'DD MMMM YYYY в HH:mm'}}</b>
+              </p>
+              <p class="order__info">
+                <span>{{'Тип транспорта' | translate}}</span>
+                <b>{{returnNameTypeTransport(row.transport_type)}}</b>
+              </p>
+              <p class="order__info">
+                <span>{{'Тип груза' | translate}}</span>
+                <b>{{returnNameCargoType(row.type_cargo)}}</b>
+              </p>
+              <p class="order__info">
+                <span>{{'Вес груза' | translate}}</span>
+                <b>{{row.weight}} {{'кг' | translate}}.</b>
+              </p>
+              <p class="order__info">
+                <span>{{'Водитель' | translate}}</span>
+                <b>{{getAcceptedDriver(row.id)?.name}}</b>
+              </p>
+              <div class="item-offers__btns full-button" *ngIf="!row.raiting_driver && row.driver_id">
+                <button class="item-offers__btn btn-succes" (click)="setRaitingDriver(row.id,row.driver_id)">
+                  Оценить водителя
+                </button>
+              </div>
+              <!--<p class="order__info" (click)="callMan(getAcceptedDriver(row.id).phone)">
+                <span>Контакты</span>
+                <b>{{getAcceptedDriver(row.id).phone | mask:'+000 (00) 000 00 00'}}</b>
+              </p>-->
+              <!--<p class="order__info">
+                <span>Адекватность</span>
+                <b><img src="/assets/img/stars.svg" alt="Картинка" /></b>
+              </p>
+              <p class="order__info">
+                <span>Оперативность</span>
+                <b><img src="/assets/img/stars.svg" alt="Картинка" /></b>
+              </p>-->
+              <!--<div class="item-offers__btns full-button">
+                <button class="item-offers__btn btn-succes" (click)="callMan(getAcceptedDriver(row.id).phone)">
+                  Позвонить
+                </button>
+              </div>-->
+            </div>
+          </div>
+        </article>
+      </ng-container>
+    </section>
+  </main>
+
+</ion-content>

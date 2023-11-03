@@ -1,0 +1,38 @@
+<ion-header>
+  <div class="wrapper-fluid-header">
+    <div class="logo-wrap personal-head">
+      <button class="top-back" (click)="back()"><img src="assets/img/arrow-left.svg" alt=""></button>
+      <h2>{{'Служба поддержки' | translate}}</h2>
+      <div></div>
+    </div>
+  </div>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="1" pullMin="100" pullMax="200">
+    <ion-refresher-content
+            class="loadingspinner"
+            pullingIcon="arrow-dropdown"
+            refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  <main class="support">
+    <section class="support__messages">
+
+      <ng-container *ngFor="let row of authService.messages | orderBy: 'created_at';">
+        <p class="support__message"  [ngClass]="!row.user_admin_id ? '_client':'_support'" >
+          <span>{{row.text}}</span>
+          <small>{{row.date | formatTime: 'DD MMMM YYYY в HH:mm'}}</small>
+        </p>
+      </ng-container>
+    </section>
+    <div class="support__input">
+      <div class="form__input">
+        <input type="text" [disabled]="disablebuttonsend" placeholder="{{'Введите сообщение' | translate}}"  [(ngModel)]="message"/>
+        <button class="support__submit" (click)="sendMessage()" [disabled]="disablebuttonsend">
+          <i class="icm-send"></i>
+        </button>
+      </div>
+    </div>
+  </main>
+
+</ion-content>

@@ -1,0 +1,62 @@
+@import "base";
+
+.notifs {
+  &__main {
+    display: grid;
+    gap: rem(20);
+  }
+  &__group {
+    display: grid;
+    gap: rem(10);
+  }
+  &__time {
+    font-size: rem(13);
+    color: #403c61;
+    text-align: center;
+  }
+  &__items {
+    display: grid;
+    gap: rem(10);
+  }
+  &__item {
+  }
+}
+
+.item-notifs {
+  border-radius: rem(5);
+  background: #252333;
+  padding: rem(15);
+
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  // gap: rem(10) 0;
+  grid-template-columns: auto 1fr;
+  small{
+    display: block;
+    color: white;
+    margin-top: 5px;
+    width: 100%;
+    text-align: right;
+  }
+  h2{
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    color: white;
+  }
+  &__icon {
+    width: rem(30);
+    margin-right: rem(15);
+  }
+  &__text {
+    color: #fff;
+    font-weight: 600;
+  }
+  &__link {
+    grid-column: 2 / 3;
+    justify-self: end;
+    color: #403c61;
+    font-weight: 500;
+    padding: rem(5);
+  }
+}
