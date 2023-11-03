@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "93382092006",
+    "project_id": "iotirgocustomer",
+    "storage_bucket": "iotirgocustomer.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:93382092006:android:b441601657c46ed309c727",
+        "android_client_info": {
+          "package_name": "io.tirgo.customer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVvO56mdF5Fh48RLTe7d8cuFE6cF6p3ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,7 +7,7 @@ import {Storage} from '@ionic/storage';
 import {AlertController} from "@ionic/angular";
 
 const TOKEN_KEY = 'jwttirgoclienttoken';
-const API_URL = 'https://tirgo.io:7790';
+const API_URL = 'https://tirgo-server.onrender.com';
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
 @Injectable({
@@ -15,7 +15,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 })
 export class AuthenticationService {
   authenticationState = new BehaviorSubject({});
-  public serverApi: string = 'https://tirgo.io:7790';
+  public serverApi: string = 'https://tirgo-server.onrender.com';
   public currentUser: User | undefined;
   public viewintro: boolean = false
   static jwt: any;

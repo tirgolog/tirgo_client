@@ -16,7 +16,7 @@ export class SocketService {
         }
     }
     connect() {
-        this.socket = io('https://tirgo.io:7790');
+        this.socket = io('https://tirgo-server.onrender.com');
         this.socket.on('connect', () => {
                 this.socket.emit('authenticate', {token: AuthenticationService.jwt})
                     .on('authenticated', (data:any) => {

@@ -1,0 +1,24 @@
+.modal {
+   margin: 0 auto;
+   width: rem(280);
+   background: #252333;
+   border-radius: rem(8);
+
+   padding: rem(15);
+
+   display: grid;
+   justify-items: center;
+
+   text-align: center;
+   &__img {
+      width: rem(80);
+      margin-bottom: rem(20);
+   }
+   &__text {
+      color: #fff;
+      margin-bottom: rem(30);
+   }
+   &__btn {
+      width: 100%;
+   }
+}
