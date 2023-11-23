@@ -7,15 +7,16 @@ import {Storage} from '@ionic/storage';
 import {AlertController} from "@ionic/angular";
 
 const TOKEN_KEY = 'jwttirgoclienttoken';
-const API_URL = 'https://tirgo-server.onrender.com';
+const API_URL = 'https://admin.tirgo.io/api';
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
+import { log } from 'console';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   authenticationState = new BehaviorSubject({});
-  public serverApi: string = 'https://tirgo-server.onrender.com';
+  public serverApi: string = 'https://admin.tirgo.io/api';
   public currentUser: User | undefined;
   public viewintro: boolean = false
   static jwt: any;
@@ -59,7 +60,6 @@ export class AuthenticationService {
     return this.http.post<any>(sUrl, body);
   }
   createOrder(data:any) {
-    console.log(data)
     //const sUrl = API_URL + '/users/createOrderClient';
     const sUrl = API_URL + '/users/createOrderClientTypes';
     const body = JSON.stringify({
@@ -95,7 +95,6 @@ export class AuthenticationService {
     });
     return this.http.post<any>(sUrl, body)
         .pipe(map(res => {
-          console.log(res)
           if (res.status) {
             return res.data;
           } else {
@@ -159,7 +158,6 @@ export class AuthenticationService {
     const sUrl = API_URL + '/users/getTypeTruck';
     return this.http.get<any>(sUrl)
         .pipe(map(res => {
-          console.log(res)
           if (res.status) {
             return res.data;
           } else {
@@ -220,7 +218,6 @@ export class AuthenticationService {
     const sUrl = API_URL + '/users/getNotifyClient';
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
-        console.log(res)
         if (res.data) {
           return res.data;
         } else {
@@ -233,7 +230,6 @@ export class AuthenticationService {
     const sUrl = API_URL + '/users/getAllMessages';
     return this.http.get<any>(sUrl)
         .pipe(map(res => {
-          console.log(res)
           if (res.data) {
             return res.data;
           } else {
@@ -245,7 +241,6 @@ export class AuthenticationService {
     const sUrl = API_URL + '/truck-booking/orders';
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
-        console.log(res)
         if (res.data) {
           return res.data;
         } else {
@@ -257,7 +252,6 @@ export class AuthenticationService {
     const sUrl = API_URL + '/truck-booking?status=processing';
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
-        console.log(res)
         if (res.data) {
           return res.data;
         } else {
@@ -269,7 +263,6 @@ export class AuthenticationService {
     const sUrl = API_URL + '/truck-booking?status=done';
     return this.http.get<any>(sUrl)
       .pipe(map(res => {
-        console.log(res)
         if (res.data) {
           return res.data;
         } else {

@@ -4,6 +4,7 @@ import {formatDate} from "@angular/common";
 import {addDays} from "date-fns";
 import {CallNumber} from "@ionic-native/call-number/ngx";
 import {ActionSheetController, AlertController} from "@ionic/angular";
+import { log } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -207,6 +208,7 @@ export class HomePage implements OnInit {
     actionSheet.present();
   }
   viewOrderInfo(id:number){
+    console.log(id)
     if (this.vieworder === id){
       this.vieworder = 0;
     }else {

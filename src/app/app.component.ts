@@ -11,6 +11,7 @@ import {PushService} from "./services/push.service";
 import {SocketService} from "./services/socket.service";
 import {Observable} from "rxjs";
 import {HttpClient} from "@angular/common/http";
+import { log } from 'console';
 
 @Component({
   selector: 'app-root',

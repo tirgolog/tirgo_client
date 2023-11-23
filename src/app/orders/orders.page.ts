@@ -34,7 +34,8 @@ export class OrdersPage implements OnInit {
   }
 
   returnNameCargoType(id:number){
-    const index = this.authService.typecargo.findIndex(e => +e.id === +id)
+    console.log(id)
+    const index = this.authService.typecargo.findIndex(e => +e.id === +id);
     if (index>=0){
       return this.authService.typecargo[index].name
     }else {
@@ -53,7 +54,6 @@ export class OrdersPage implements OnInit {
     }
   }
   callMan(phone:string){
-    console.log(phone)
     this.callNumber.callNumber('+'+phone, true)
   }
   async setRaitingDriver(orderid:number,driverid:string){

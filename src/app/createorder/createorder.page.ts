@@ -5,6 +5,7 @@ import {AuthenticationService} from "../services/authentication.service";
 import {SelecttypecargoPage} from "../selecttypecargo/selecttypecargo.page";
 import {Router} from "@angular/router";
 import * as moment from "moment";
+import { log } from 'console';
 
 @Component({
   selector: 'app-createorder',
@@ -185,18 +186,25 @@ export class CreateorderPage implements OnInit {
       }
     }else {
       if (+this.data.weight > 35000){
+        this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Вес груза не может быть больше 35 000 кг.')
       }else if (this.data.city_start === ''){
+        this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Нужно выбрать место отправки груза')
       }else if (this.data.city_finish === ''){
+        this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Нужно выбрать место доставки груза')
       }else if (this.data.typecargo === 0){
+        this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Нужно выбрать тип груза')
       }else if (this.data.weight === ''){
+        this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Нужно ввести вес груза')
       }else if (this.data.price === ''){
+        this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Нужно ввести предлагаемую цену')
       }else if (!this.data.typestransport.length){
+        this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Нужно выбрать тип транспорта')
       }else {
         await this.authService.createOrder(this.data).toPromise()
@@ -230,10 +238,12 @@ export class CreateorderPage implements OnInit {
                   no_cash: false,
                 }
                 await this.router.navigate(['/tabs/home'], {replaceUrl: true});
+                this.loadingCreateOrder = false;
               }
             })
             .catch(async (err) => {
               console.log(err)
+              this.loadingCreateOrder = false;
             });
       }
     }

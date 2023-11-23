@@ -55,7 +55,7 @@
                                     </p>
                                     <p class="order__info">
                                         <span>{{'Тип транспорта' | translate}}</span>
-                                        <b>{{returnNameTypeTransport(row.transport_type)}}</b>
+                                            <b *ngFor="let type of row.transport_types">{{returnNameTypeTransport(type)}}</b> <br>
                                     </p>
                                     <p class="order__info">
                                         <span>{{'Тип груза' | translate}}</span>

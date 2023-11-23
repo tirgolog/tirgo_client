@@ -27,8 +27,6 @@ import { Camera } from '@awesome-cordova-plugins/camera/ngx';
 import {FileTransfer } from "@ionic-native/file-transfer/ngx";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
-
-
 registerLocaleData(ruLocale);
 
 export function createTranslateLoader(http: HttpClient) {
