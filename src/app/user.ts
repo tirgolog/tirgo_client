@@ -14,6 +14,7 @@ export class User {
     public geo_id: any;
     public balance: number;
     public adr: number;
+    public config: any;
     constructor(user:any) {
         this.id = +user.id;
         this.name = user.name;
@@ -30,5 +31,6 @@ export class User {
         this.geo_id = +user.geo_id;
         this.balance = +user.balance;
         this.adr = +user.adr;
+        this.config = user.config[0]
     }
 }

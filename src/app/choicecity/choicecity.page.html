@@ -17,7 +17,7 @@
   <ion-list>
     <ng-container  *ngFor="let city of findList">
       <ion-item class="my-cities" lines="none" (click)="setCity(city)">
-        <ion-label>{{city.name}}<br> <small class="unrestricted_value">{{city.display_name}}</small></ion-label>
+        <ion-label>{{city.name}}<br> <small class="unrestricted_value">{{city.name}}</small></ion-label>
       </ion-item>
     </ng-container>
   </ion-list>
