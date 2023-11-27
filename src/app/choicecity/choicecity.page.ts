@@ -51,7 +51,7 @@ export class ChoicecityPage implements OnInit {
           if(suggestions) {
             this.findList = suggestions.map((el: any) => {
               return {
-                name: (el.data.city ? el.data.city : el.data.region) + ' '+ el.data.country
+                name: (el.data.city ? el.data.city : el.data.region) + ', '+ el.data.country
               }
             })
           } else {
