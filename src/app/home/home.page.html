@@ -1,150 +1,156 @@
 <app-header></app-header>
 <ion-content class="ion-padding">
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="1" pullMin="100" pullMax="200">
-        <ion-refresher-content
-                class="loadingspinner"
-                pullingIcon="arrow-dropdown"
-                refreshingSpinner="circles">
-        </ion-refresher-content>
-    </ion-refresher>
-    <main class="home">
-        <div *ngIf="!authService.myorders.length" class="no-items">
-            Нет активных заказов
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)" pullFactor="1" pullMin="100" pullMax="200">
+    <ion-refresher-content class="loadingspinner" pullingIcon="arrow-dropdown" refreshingSpinner="circles">
+    </ion-refresher-content>
+  </ion-refresher>
+  <main class="home">
+    <div *ngIf="!authService.myorders.length" class="no-items">
+      Нет активных заказов
+    </div>
+    <section class="home__main" *ngIf="authService.myorders.length">
+      <div class="tab">
+        <div class="tab__header">
+          <button class="tab__btn" [ngClass]="selectedType === 'view' ? 'btn':''" (click)="selectType('view')">{{'На
+            рассмотрении' | translate}}</button>
+          <button class="tab__btn" [ngClass]="selectedType === 'process' ? 'btn':''"
+            (click)="selectType('process')">{{'В процессе' | translate}}</button>
         </div>
-        <section class="home__main" *ngIf="authService.myorders.length">
-            <div class="tab">
-                <div class="tab__header">
-                    <button class="tab__btn" [ngClass]="selectedType === 'view' ? 'btn':''" (click)="selectType('view')">{{'На рассмотрении' | translate}}</button>
-                    <button class="tab__btn" [ngClass]="selectedType === 'process' ? 'btn':''"  (click)="selectType('process')">{{'В процессе' | translate}}</button>
+        <div class="tab__content">
+          <div class="tab__body" *ngIf="selectedType === 'view'">
+            <ng-container *ngFor="let row of authService.myorders">
+              <article class="order" *ngIf="row.status === 0">
+                <div class="order__header">
+                  <div class="order__title">
+                    <img src="/assets/img/status/consider.svg" alt="Картинка" />
+                    №{{authService.addLeadingZeros(row.id)}}
+                    <!--<i class="icm-accept"></i>-->
+                  </div>
+                  <div class="order__locates">
+                    <div class="order__locate">
+                      <i class="icm-locate"></i>
+                      <p>
+                        <span>{{'Отправка из' | translate}}</span> <br />
+                        {{row.route.from_city}}
+                      </p>
+                    </div>
+                    <div class="order__locate">
+                      <i class="icm-flag"></i>
+                      <p>
+                        <span>{{'Доставка в' | translate}}</span> <br />
+                        {{row.route.to_city}}
+                      </p>
+                    </div>
+                  </div>
                 </div>
-                <div class="tab__content" >
-                    <div class="tab__body" *ngIf="selectedType === 'view'">
-                        <ng-container *ngFor="let row of authService.myorders">
-                            <article class="order" *ngIf="row.status === 0">
-                            <div class="order__header">
-                                <div class="order__title">
-                                    <img
-                                            src="/assets/img/status/consider.svg"
-                                            alt="Картинка"
-                                    />
-                                    №{{authService.addLeadingZeros(row.id)}}
-                                    <!--<i class="icm-accept"></i>-->
-                                </div>
-                                <div class="order__locates">
-                                    <div class="order__locate">
-                                        <i class="icm-locate"></i>
-                                        <p>
-                                            <span>{{'Отправка из' | translate}}</span> <br />
-                                            {{row.route.from_city}}
-                                        </p>
-                                    </div>
-                                    <div class="order__locate">
-                                        <i class="icm-flag"></i>
-                                        <p>
-                                            <span>{{'Доставка в' | translate}}</span> <br />
-                                            {{row.route.to_city}}
-                                        </p>
-                                    </div>
-                                </div>
+                <div class="order__main">
+                  <div class="order__infos">
+                    <p class="order__info">
+                      <span>{{'Время отправки' | translate}}</span>
+                      <b>{{row.date_send | formatTime: 'DD MMMM YYYY в HH:mm'}}</b>
+                    </p>
+                    <p class="order__info">
+                      <span>{{'Тип транспорта' | translate}}</span>
+                      <td style="color: white;">
+                        <div style=" margin: 3px 0;" *ngFor="let type of row.transport_types">{{returnNameTypeTransport(type)}}</div>
+                      </td>
+                    </p>
+                    <p class="order__info">
+                      <span>{{'Тип груза' | translate}}</span>
+                      <b>{{returnNameCargoType(row.type_cargo)}}</b>
+                    </p>
+                    <p class="order__info">
+                      <span>{{'Вес груза' | translate}}</span>
+                      <b>{{row.weight}} {{'кг' | translate}}.</b>
+                    </p>
+                  </div>
+                  <div class="order__offers offers" *ngIf="row.orders_accepted && row.orders_accepted.length">
+                    <button class="offers__header" (click)="viewOrderInfo(row.id)">
+                      <p class="offers__title">{{'Предложения' | translate}}</p>
+                      <span class="offers__count">{{row.orders_accepted.length}}</span>
+                    </button>
+                    <div class="offers__items" *ngIf="vieworder === row.id">
+                      <div class="offers__item item-offers" *ngFor="let user of row.orders_accepted">
+                        <div class="item-offers__main">
+                          <div class="item-offers__content">
+                            <img [src]="user.avatar ? user.avatar:'/assets/img/user-empty.png'" class="item-offers__img"
+                              alt="Картинка" />
+                            <div class="item-offers__info">
+                              <p class="item-offers__title">
+                                {{user.name}}
+                              </p>
+                              <div class="item-offers__date"
+                                *ngIf="user.one_day >0 || user.two_day > 0 || user.three_day > 0 ">
+                                <span>{{'Готов к погрузке' | translate}}:</span>
+                                <span>
+                                  <p *ngIf="user.one_day">{{row.date_send |
+                                    formatTime: 'DD MMMM'}}, </p>
+                                  <p *ngIf="user.two_day">{{addDay(row.date_send,1)}},
+                                  </p>
+                                  <p *ngIf="user.three_day">
+                                    {{addDay(row.date_send,2)}}</p>
+                                </span>
+                              </div>
+                              <div class="item-offers__price" *ngIf="!row.secure_transaction">
+                                <span>{{'Ценовое предложение' | translate}}:</span>
+                                <b>{{user.priceorder}} $</b>
+                              </div>
+                              <div class="item-offers__price" *ngIf="row.secure_transaction">
+                                <span>{{'Ценовое предложение' | translate}}:</span>
+                                <b>{{calcSafePrice(user.priceorder)}} $</b>
+                              </div>
                             </div>
-                            <div class="order__main">
-                                <div class="order__infos">
-                                    <p class="order__info">
-                                        <span>{{'Время отправки' | translate}}</span>
-                                        <b>{{row.date_send | formatTime: 'DD MMMM YYYY в HH:mm'}}</b>
-                                    </p>
-                                    <p class="order__info">
-                                        <span>{{'Тип транспорта' | translate}}</span>
-                                            <b *ngFor="let type of row.transport_types">{{returnNameTypeTransport(type)}}</b> <br>
-                                    </p>
-                                    <p class="order__info">
-                                        <span>{{'Тип груза' | translate}}</span>
-                                        <b>{{returnNameCargoType(row.type_cargo)}}</b>
-                                    </p>
-                                    <p class="order__info">
-                                        <span>{{'Вес груза' | translate}}</span>
-                                        <b>{{row.weight}} {{'кг' | translate}}.</b>
-                                    </p>
-                                </div>
-                                <div class="order__offers offers" *ngIf="row.orders_accepted && row.orders_accepted.length">
-                                    <button class="offers__header" (click)="viewOrderInfo(row.id)">
-                                        <p class="offers__title">{{'Предложения' | translate}}</p>
-                                        <span class="offers__count">{{row.orders_accepted.length}}</span>
-                                    </button>
-                                    <div class="offers__items" *ngIf="vieworder === row.id">
-                                        <div class="offers__item item-offers" *ngFor="let user of row.orders_accepted">
-                                            <div class="item-offers__main">
-                                                <div class="item-offers__content">
-                                                    <img
-                                                            [src]="user.avatar ? user.avatar:'/assets/img/user-empty.png'"
-                                                            class="item-offers__img"
-                                                            alt="Картинка"
-                                                    />
-                                                    <div class="item-offers__info">
-                                                        <p class="item-offers__title">
-                                                            {{user.name}}
-                                                        </p>
-                                                        <div class="item-offers__date" *ngIf="user.one_day >0 || user.two_day > 0 || user.three_day > 0 ">
-                                                            <span>{{'Готов к погрузке' | translate}}:</span>
-                                                            <span>
-                                                                <p *ngIf="user.one_day">{{row.date_send | formatTime: 'DD MMMM'}}, </p>
-                                                                <p *ngIf="user.two_day">{{addDay(row.date_send,1)}}, </p>
-                                                                <p *ngIf="user.three_day">{{addDay(row.date_send,2)}}</p>
-                                                            </span>
-                                                        </div>
-                                                        <div class="item-offers__price" *ngIf="!row.secure_transaction">
-                                                            <span>{{'Ценовое предложение' | translate}}:</span>
-                                                            <b>{{user.priceorder}} $</b>
-                                                        </div>
-                                                        <div class="item-offers__price" *ngIf="row.secure_transaction">
-                                                            <span>{{'Ценовое предложение' | translate}}:</span>
-                                                            <b>{{calcSafePrice(user.priceorder)}} $</b>
-                                                        </div>
-                                                    </div>
-                                                    <div class="item-offers__rating">
-                                                        <ng-container *ngIf="user.moderation">
-                                                            <i class="icm-verif"></i> <br>
-                                                        </ng-container>
-                                                        {{user.raiting}}
-                                                    </div>
-                                                </div>
-                                                <div class="item-offers__cars">
-                                                    <ng-container *ngFor="let car of user.trucks">
-                                                        <div class="item-car-accepted-driver" *ngIf="car.type === row.transport_type">
-                                                            <h3 class="ion-no-padding ion-no-margin">{{car.name}}</h3>
-                                                            <p class="ion-no-padding ion-no-margin">{{'Кубатура' | translate}}: <b>{{car.cubature}} м3 </b></p>
-                                                            <!--<p class="ion-no-padding ion-no-margin">Гос. номер: <b>{{car.state_number}}</b></p>-->
-                                                            <p class="ion-no-padding ion-no-margin">{{'Грузоподъемность' | translate}}: <b>{{car.max_weight}} кг.</b></p>
-                                                            <p class="ion-no-padding ion-no-margin" *ngIf="car.moderation === 1">{{'Описание' | translate}}: {{car.description}}</p>
-                                                            <!--<div class="img-cars" *ngIf="car.docks && car.docks.length">
+                            <div class="item-offers__rating">
+                              <ng-container *ngIf="user.moderation">
+                                <i class="icm-verif"></i> <br>
+                              </ng-container>
+                              {{user.raiting}}
+                            </div>
+                          </div>
+                          <div class="item-offers__cars">
+                            <ng-container *ngFor="let car of user.trucks">
+                              <div class="item-car-accepted-driver" *ngIf="car.type === row.transport_type">
+                                <h3 class="ion-no-padding ion-no-margin">{{car.name}}
+                                </h3>
+                                <p class="ion-no-padding ion-no-margin">{{'Кубатура' |
+                                  translate}}: <b>{{car.cubature}} м3 </b></p>
+                                <!--<p class="ion-no-padding ion-no-margin">Гос. номер: <b>{{car.state_number}}</b></p>-->
+                                <p class="ion-no-padding ion-no-margin">
+                                  {{'Грузоподъемность' | translate}}:
+                                  <b>{{car.max_weight}} кг.</b>
+                                </p>
+                                <p class="ion-no-padding ion-no-margin" *ngIf="car.moderation === 1">{{'Описание' |
+                                  translate}}: {{car.description}}</p>
+                                <!--<div class="img-cars" *ngIf="car.docks && car.docks.length">
                                                                 <ng-container *ngFor="let carimage of car.docks">
                                                                     <img *ngIf="carimage.type_file === 'car_photos'" [src]="carimage.preview" alt="">
                                                                 </ng-container>
                                                             </div>-->
-                                                        </div>
-                                                    </ng-container>
-                                                </div>
-                                                <div class="item-offers__btns" *ngIf="user.status_order !== 2">
-                                                    <button class="item-offers__btn btn-cancel" (click)="cancelDriver(user.id,row.id)">
-                                                        {{'Отклонить' | translate}}
-                                                    </button>
-                                                    <button class="item-offers__btn btn-succes" (click)="acceptDriver(user.id,row.id,row.secure_transaction,user.priceorder)">
-                                                        {{'Принять' | translate}}
-                                                    </button>
-                                                </div>
-                                                <div class="item-offers__btns full-button" *ngIf="user.status_order === 2">
-                                                    <button class="item-offers__btn btn-orange">
-                                                        {{'Вы отклонили данного Водителя' | translate}}
-                                                    </button>
-                                                </div>
-                                            </div>
-                                            <!--<button class="item-offers__more">
+                              </div>
+                            </ng-container>
+                          </div>
+                          <div class="item-offers__btns" *ngIf="user.status_order !== 2">
+                            <button class="item-offers__btn btn-cancel" (click)="cancelDriver(user.id,row.id)">
+                              {{'Отклонить' | translate}}
+                            </button>
+                            <button class="item-offers__btn btn-succes"
+                              (click)="acceptDriver(user.id,row.id,row.secure_transaction,user.priceorder)">
+                              {{'Принять' | translate}}
+                            </button>
+                          </div>
+                          <div class="item-offers__btns full-button" *ngIf="user.status_order === 2">
+                            <button class="item-offers__btn btn-orange">
+                              {{'Вы отклонили данного Водителя' | translate}}
+                            </button>
+                          </div>
+                        </div>
+                        <!--<button class="item-offers__more">
                                                 Подробнее
                                             </button>-->
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--<div class="order__map">
+                      </div>
+                    </div>
+                  </div>
+                  <!--<div class="order__map">
                                     <div id="map">
                                         <img src="https://static-maps.yandex.ru/1.x/?ll={{item.lng}},{{item.lat}}&spn=0.016457,0.00619&l=map" alt="" />
                                     </div>
@@ -155,10 +161,10 @@
                                 <button class="order__status btn-orange">
                                     Статус: На месте
                                 </button>-->
-                            </div>
-                        </article>
-                        </ng-container>
-                        <!--<article class="order">
+                </div>
+              </article>
+            </ng-container>
+            <!--<article class="order">
                             <div class="order__header">
                                 <div class="order__title">
                                     <img
@@ -295,128 +301,131 @@
                                 </button>
                             </div>
                         </article>-->
+          </div>
+          <div class="tab__body" *ngIf="selectedType === 'process'">
+            <ng-container *ngFor="let row of authService.myorders">
+              <article class="order" *ngIf="row.status === 1">
+                <div class="order__header">
+                  <div class="order__title">
+                    <img src="/assets/img/status/consider.svg" alt="Картинка" />
+                    №{{authService.addLeadingZeros(row.id)}}
+                    <!--<i class="icm-accept"></i>-->
+                  </div>
+                  <div class="order__locates">
+                    <div class="order__locate">
+                      <i class="icm-locate"></i>
+                      <p>
+                        <span>{{'Отправка из' | translate}}</span> <br />
+                        {{row.route.from_city}}
+                      </p>
                     </div>
-                    <div class="tab__body" *ngIf="selectedType === 'process'">
-                        <ng-container *ngFor="let row of authService.myorders">
-                            <article class="order" *ngIf="row.status === 1">
-                                <div class="order__header">
-                                    <div class="order__title">
-                                        <img
-                                                src="/assets/img/status/consider.svg"
-                                                alt="Картинка"
-                                        />
-                                        №{{authService.addLeadingZeros(row.id)}}
-                                        <!--<i class="icm-accept"></i>-->
-                                    </div>
-                                    <div class="order__locates">
-                                        <div class="order__locate">
-                                            <i class="icm-locate"></i>
-                                            <p>
-                                                <span>{{'Отправка из' | translate}}</span> <br />
-                                                {{row.route.from_city}}
-                                            </p>
-                                        </div>
-                                        <div class="order__locate">
-                                            <i class="icm-flag"></i>
-                                            <p>
-                                                <span>{{'Доставка в' | translate}}</span> <br />
-                                                {{row.route.to_city}}
-                                            </p>
-                                        </div>
-                                    </div>
+                    <div class="order__locate">
+                      <i class="icm-flag"></i>
+                      <p>
+                        <span>{{'Доставка в' | translate}}</span> <br />
+                        {{row.route.to_city}}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="order__main">
+                  <div class="order__infos">
+                    <p class="order__info">
+                      <span>{{'Время отправки' | translate}}</span>
+                      <b>{{row.date_send | formatTime: 'DD MMMM YYYY в HH:mm'}}</b>
+                    </p>
+                    <p class="order__info">
+                      <span>{{'Тип транспорта' | translate}}</span>
+                      <b>{{returnNameTypeTransport(row.transport_type)}}</b>
+                    </p>
+                    <p class="order__info">
+                      <span>{{'Тип груза' | translate}}</span>
+                      <b>{{returnNameCargoType(row.type_cargo)}}</b>
+                    </p>
+                    <p class="order__info">
+                      <span>{{'Вес груза' | translate}}</span>
+                      <b>{{row.weight}} {{'кг' | translate}}.</b>
+                    </p>
+                  </div>
+                  <div class="order__offers offers">
+                    <div class="offers__items">
+                      <ng-container *ngFor="let user of row.orders_accepted">
+                        <div class="offers__item item-offers" *ngIf="user.status_order === 1">
+                          <div class="item-offers__main">
+                            <div class="item-offers__content">
+                              <img [src]="user.avatar ? user.avatar:'/assets/img/user-empty.png'"
+                                class="item-offers__img" alt="Картинка" />
+                              <div class="item-offers__info">
+                                <p class="item-offers__title">
+                                  {{user.name}}
+                                </p>
+                                <div class="item-offers__date">
+                                  <span>{{'Готов к погрузке' | translate}}:</span>
+                                  <span>
+                                    <p *ngIf="user.one_day">{{row.date_send |
+                                      formatTime: 'DD MMMM'}}, </p>
+                                    <p *ngIf="user.two_day">
+                                      {{addDay(row.date_send,1)}}, </p>
+                                    <p *ngIf="user.three_day">
+                                      {{addDay(row.date_send,2)}}</p>
+                                  </span>
                                 </div>
-                                <div class="order__main">
-                                    <div class="order__infos">
-                                        <p class="order__info">
-                                            <span>{{'Время отправки' | translate}}</span>
-                                            <b>{{row.date_send | formatTime: 'DD MMMM YYYY в HH:mm'}}</b>
-                                        </p>
-                                        <p class="order__info">
-                                            <span>{{'Тип транспорта' | translate}}</span>
-                                            <b>{{returnNameTypeTransport(row.transport_type)}}</b>
-                                        </p>
-                                        <p class="order__info">
-                                            <span>{{'Тип груза' | translate}}</span>
-                                            <b>{{returnNameCargoType(row.type_cargo)}}</b>
-                                        </p>
-                                        <p class="order__info">
-                                            <span>{{'Вес груза' | translate}}</span>
-                                            <b>{{row.weight}} {{'кг' | translate}}.</b>
-                                        </p>
-                                    </div>
-                                    <div class="order__offers offers">
-                                        <div class="offers__items">
-                                            <ng-container *ngFor="let user of row.orders_accepted">
-                                                <div class="offers__item item-offers" *ngIf="user.status_order === 1">
-                                                    <div class="item-offers__main">
-                                                        <div class="item-offers__content">
-                                                            <img
-                                                                    [src]="user.avatar ? user.avatar:'/assets/img/user-empty.png'"
-                                                                    class="item-offers__img"
-                                                                    alt="Картинка"
-                                                            />
-                                                            <div class="item-offers__info">
-                                                                <p class="item-offers__title">
-                                                                    {{user.name}}
-                                                                </p>
-                                                                <div class="item-offers__date">
-                                                                    <span>{{'Готов к погрузке' | translate}}:</span>
-                                                                    <span>
-                                                                <p *ngIf="user.one_day">{{row.date_send | formatTime: 'DD MMMM'}}, </p>
-                                                                <p *ngIf="user.two_day">{{addDay(row.date_send,1)}}, </p>
-                                                                <p *ngIf="user.three_day">{{addDay(row.date_send,2)}}</p>
-                                                            </span>
-                                                                </div>
-                                                                <div class="item-offers__price" *ngIf="!row.secure_transaction">
-                                                                    <span>{{'Ценовое предложение' | translate}}:</span>
-                                                                    <b>{{user.priceorder}} $</b>
-                                                                </div>
-                                                                <div class="item-offers__price" *ngIf="row.secure_transaction">
-                                                                    <span>{{'Ценовое предложение' | translate}}:</span>
-                                                                    <b>{{calcSafePrice(user.priceorder)}} $</b>
-                                                                </div>
-                                                            </div>
-                                                            <div class="item-offers__rating">
-                                                                <ng-container *ngIf="user.moderation">
-                                                                    <i class="icm-verif"></i> <br>
-                                                                </ng-container>
-                                                                {{user.raiting}}
-                                                            </div>
-                                                        </div>
-                                                        <div class="item-offers__cars">
-                                                            <ng-container *ngFor="let car of user.trucks">
-                                                                <div class="item-car-accepted-driver" *ngIf="car.type === row.transport_type">
-                                                                    <h3 class="ion-no-padding ion-no-margin">{{car.name}}</h3>
-                                                                    <p class="ion-no-padding ion-no-margin">{{'Кубатура' | translate}}: <b>{{car.cubature}} м3 </b></p>
-                                                                    <!--<p class="ion-no-padding ion-no-margin">Гос. номер: <b>{{car.state_number}}</b></p>-->
-                                                                    <p class="ion-no-padding ion-no-margin">{{'Грузоподъемность' | translate}}: <b>{{car.max_weight}} кг.</b></p>
-                                                                    <p class="ion-no-padding ion-no-margin" *ngIf="car.moderation === 1">{{'Описание' | translate}}: {{car.description}}</p>
-                                                                    <!--<div class="img-cars" *ngIf="car.docks && car.docks.length">
+                                <div class="item-offers__price" *ngIf="!row.secure_transaction">
+                                  <span>{{'Ценовое предложение' | translate}}:</span>
+                                  <b>{{user.priceorder}} $</b>
+                                </div>
+                                <div class="item-offers__price" *ngIf="row.secure_transaction">
+                                  <span>{{'Ценовое предложение' | translate}}:</span>
+                                  <b>{{calcSafePrice(user.priceorder)}} $</b>
+                                </div>
+                              </div>
+                              <div class="item-offers__rating">
+                                <ng-container *ngIf="user.moderation">
+                                  <i class="icm-verif"></i> <br>
+                                </ng-container>
+                                {{user.raiting}}
+                              </div>
+                            </div>
+                            <div class="item-offers__cars">
+                              <ng-container *ngFor="let car of user.trucks">
+                                <div class="item-car-accepted-driver" *ngIf="car.type === row.transport_type">
+                                  <h3 class="ion-no-padding ion-no-margin">
+                                    {{car.name}}</h3>
+                                  <p class="ion-no-padding ion-no-margin">{{'Кубатура'
+                                    | translate}}: <b>{{car.cubature}} м3 </b></p>
+                                  <!--<p class="ion-no-padding ion-no-margin">Гос. номер: <b>{{car.state_number}}</b></p>-->
+                                  <p class="ion-no-padding ion-no-margin">
+                                    {{'Грузоподъемность' | translate}}:
+                                    <b>{{car.max_weight}} кг.</b>
+                                  </p>
+                                  <p class="ion-no-padding ion-no-margin" *ngIf="car.moderation === 1">{{'Описание' |
+                                    translate}}: {{car.description}}</p>
+                                  <!--<div class="img-cars" *ngIf="car.docks && car.docks.length">
                                                                         <ng-container *ngFor="let carimage of car.docks">
                                                                             <img *ngIf="carimage.type_file === 'car_photos'" [src]="carimage.preview" alt="">
                                                                         </ng-container>
                                                                     </div>-->
-                                                                </div>
-                                                            </ng-container>
-                                                        </div>
-                                                        <div class="item-offers__btns full-button">
-                                                            <button class="item-offers__btn btn-succes" (click)="callMan(user)">
-                                                                {{'Позвонить' | translate}}
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <!--<button class="item-offers__more">
+                                </div>
+                              </ng-container>
+                            </div>
+                            <div class="item-offers__btns full-button">
+                              <button class="item-offers__btn btn-succes" (click)="callMan(user)">
+                                {{'Позвонить' | translate}}
+                              </button>
+                            </div>
+                          </div>
+                          <!--<button class="item-offers__more">
                                                         Подробнее
                                                     </button>-->
-                                                </div>
-                                            </ng-container>
-                                        </div>
-                                    </div>
-                                </div>
-                            </article>
-                        </ng-container>
+                        </div>
+                      </ng-container>
                     </div>
-                    <!--<div class="tab__body">
+                  </div>
+                </div>
+              </article>
+            </ng-container>
+          </div>
+          <!--<div class="tab__body">
                         <article class="order">
                             <div class="order__header">
                                 <div class="order__title">
@@ -559,10 +568,9 @@
                             </div>
                         </article>
                     </div>-->
-                </div>
-            </div>
-        </section>
-    </main>
+        </div>
+      </div>
+    </section>
+  </main>
 
 </ion-content>
-
