@@ -9,8 +9,8 @@
         "parents": {
           "/manifest/application": [
             {
-              "xml": "<application android:requestLegacyExternalStorage=\"true\" />",
-              "count": 2,
+              "xml": "<application android:networkSecurityConfig=\"@xml/network_security_config\" />",
+              "count": 4,
               "mode": "merge",
               "id": "config.xml",
               "oldAttrib": {
@@ -23,8 +23,8 @@
               }
             },
             {
-              "xml": "<application android:networkSecurityConfig=\"@xml/network_security_config\" />",
-              "count": 2,
+              "xml": "<application android:requestLegacyExternalStorage=\"true\" />",
+              "count": 1,
               "mode": "merge",
               "id": "config.xml",
               "oldAttrib": {
@@ -44,55 +44,55 @@
           "/*": [
             {
               "xml": "<uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
-              "count": 9
+              "count": 10
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.POST_NOTIFICATIONS\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.CAMERA\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-feature android:name=\"android.hardware.camera.autofocus\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-feature android:name=\"android.hardware.camera\" android:required=\"true\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-feature android:name=\"android.hardware.microphone\" android:required=\"true\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.MICROPHONE\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.RECORD_AUDIO\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.WAKE_LOCK\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\" />",
-              "count": 6
+              "count": 7
             },
             {
               "xml": "<queries><intent><action android:name=\"android.media.action.IMAGE_CAPTURE\" /></intent><intent><action android:name=\"android.intent.action.GET_CONTENT\" /></intent><intent><action android:name=\"android.intent.action.PICK\" /></intent><intent><action android:name=\"com.android.camera.action.CROP\" /><data android:mimeType=\"image/*\" android:scheme=\"content\" /></intent></queries>",

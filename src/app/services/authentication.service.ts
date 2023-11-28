@@ -7,7 +7,7 @@ import {Storage} from '@ionic/storage';
 import {AlertController} from "@ionic/angular";
 
 const TOKEN_KEY = 'jwttirgoclienttoken';
-const API_URL = 'https://admin.tirgo.io/api';
+const API_URL = 'http://localhost:7790';
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import { log } from 'console';
 
@@ -16,7 +16,7 @@ import { log } from 'console';
 })
 export class AuthenticationService {
   authenticationState = new BehaviorSubject({});
-  public serverApi: string = 'https://admin.tirgo.io/api';
+  public serverApi: string = 'http://localhost:7790';
   public currentUser: User | undefined;
   public viewintro: boolean = false
   static jwt: any;
