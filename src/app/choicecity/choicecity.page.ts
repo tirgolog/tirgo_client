@@ -71,7 +71,7 @@ export class ChoicecityPage implements OnInit {
   }
 
   getCity(query: string) {
-    const API_URL = 'http://localhost:7790';
+    const API_URL = 'https://admin.tirgo.io/api';
     const sUrl = API_URL + '/users/findCity';
     const body = JSON.stringify({
        query
