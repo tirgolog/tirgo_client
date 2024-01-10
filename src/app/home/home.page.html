@@ -52,7 +52,8 @@
                     <p class="order__info">
                       <span>{{'Тип транспорта' | translate}}</span>
                       <td style="color: white;">
-                        <div style=" margin: 3px 0;" *ngFor="let type of row.transport_types">{{returnNameTypeTransport(type)}}</div>
+                        <div style=" margin: 3px 0;" *ngFor="let type of row.transport_types">
+                          {{returnNameTypeTransport(type)}}</div>
                       </td>
                     </p>
                     <p class="order__info">
@@ -337,8 +338,10 @@
                     <p class="order__info">
                       <span>{{'Тип транспорта' | translate}}</span>
                       <td style="color: white;">
-                        <div style=" margin: 3px 0;" *ngFor="let type of row.transport_types">{{returnNameTypeTransport(type)}}</div>
-                      </td>                    </p>
+                        <div style=" margin: 3px 0;" *ngFor="let type of row.transport_types">
+                          {{returnNameTypeTransport(type)}}</div>
+                      </td>
+                    </p>
                     <p class="order__info">
                       <span>{{'Тип груза' | translate}}</span>
                       <b>{{returnNameCargoType(row.type_cargo)}}</b>

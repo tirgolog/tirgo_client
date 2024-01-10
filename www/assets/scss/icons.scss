@@ -1,0 +1,134 @@
+@font-face {
+   font-family: "icm";
+   src: url("../fonts/icm.eot?t=1672155614935"); /* IE9*/
+   src: url("../fonts/icm.eot?t=1672155614935#iefix")
+         format("embedded-opentype"),
+      /* IE6-IE8 */ url("../fonts/icm.woff2?t=1672155614935") format("woff2"),
+      url("../fonts/icm.woff?t=1672155614935") format("woff"),
+      url("../fonts/icm.ttf?t=1672155614935") format("truetype"),
+      /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+         url("../fonts/icm.svg?t=1672155614935#icm") format("svg"); /* iOS 4.1- */
+}
+
+[class^="icm-"],
+[class*=" icm-"] {
+   font-family: "icm" !important;
+   font-size: inherit;
+   font-style: normal;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale;
+}
+
+.icm-accept:before {
+   content: "\ea01";
+}
+.icm-arrow:before {
+   content: "\ea02";
+}
+.icm-calendar:before {
+   content: "\ea03";
+}
+.icm-cash:before {
+   content: "\ea04";
+}
+.icm-chevron:before {
+   content: "\ea05";
+}
+.icm-circle:before {
+   content: "\ea06";
+}
+.icm-close:before {
+   content: "\ea07";
+}
+.icm-consider-fill:before {
+   content: "\ea08";
+}
+.icm-consider:before {
+   content: "\ea09";
+}
+.icm-document:before {
+   content: "\ea0a";
+}
+.icm-edit:before {
+   content: "\ea0b";
+}
+.icm-exclam:before {
+   content: "\ea0c";
+}
+.icm-flag:before {
+   content: "\ea0d";
+}
+.icm-home:before {
+   content: "\ea0e";
+}
+.icm-locate:before {
+   content: "\ea0f";
+}
+.icm-logout:before {
+   content: "\ea10";
+}
+.icm-menu-calendar:before {
+   content: "\ea11";
+}
+.icm-menu-home:before {
+   content: "\ea12";
+}
+.icm-menu-plus:before {
+   content: "\ea13";
+}
+.icm-menu:before {
+   content: "\ea14";
+}
+.icm-notif:before {
+   content: "\ea15";
+}
+.icm-ok:before {
+   content: "\ea16";
+}
+.icm-refresh:before {
+   content: "\ea17";
+}
+.icm-send:before {
+   content: "\ea18";
+}
+.icm-support:before {
+   content: "\ea19";
+}
+.icm-time:before {
+   content: "\ea1a";
+}
+.icm-verif:before {
+   content: "\ea1b";
+}
+.icm-warning:before {
+   content: "\ea1c";
+}
+
+$icm-accept: "\ea01";
+$icm-arrow: "\ea02";
+$icm-calendar: "\ea03";
+$icm-cash: "\ea04";
+$icm-chevron: "\ea05";
+$icm-circle: "\ea06";
+$icm-close: "\ea07";
+$icm-consider-fill: "\ea08";
+$icm-consider: "\ea09";
+$icm-document: "\ea0a";
+$icm-edit: "\ea0b";
+$icm-exclam: "\ea0c";
+$icm-flag: "\ea0d";
+$icm-home: "\ea0e";
+$icm-locate: "\ea0f";
+$icm-logout: "\ea10";
+$icm-menu-calendar: "\ea11";
+$icm-menu-home: "\ea12";
+$icm-menu-plus: "\ea13";
+$icm-menu: "\ea14";
+$icm-notif: "\ea15";
+$icm-ok: "\ea16";
+$icm-refresh: "\ea17";
+$icm-send: "\ea18";
+$icm-support: "\ea19";
+$icm-time: "\ea1a";
+$icm-verif: "\ea1b";
+$icm-warning: "\ea1c";
