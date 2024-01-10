@@ -132,10 +132,12 @@ export class CreateorderPage implements OnInit {
         }else if (this.data.weight === ''){
           await this.authService.alert('Не можем создать заказ','Нужно ввести вес груза')
           this.loadingCreateOrder = false;
-        }else if (this.data.price === ''){
-          await this.authService.alert('Не можем создать заказ','Нужно ввести предлагаемую цену')
-          this.loadingCreateOrder = false;
-        }else if (!this.data.typestransport.length){
+        }
+        // else if (this.data.price === ''){
+        //   await this.authService.alert('Не можем создать заказ','Нужно ввести предлагаемую цену')
+        //   this.loadingCreateOrder = false;
+        // }
+        else if (!this.data.typestransport.length){
           await this.authService.alert('Не можем создать заказ','Нужно выбрать тип транспорта')
           this.loadingCreateOrder = false;
         }else {
@@ -200,10 +202,12 @@ export class CreateorderPage implements OnInit {
       }else if (this.data.weight === ''){
         this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Нужно ввести вес груза')
-      }else if (this.data.price === ''){
-        this.loadingCreateOrder = false;
-        await this.authService.alert('Не можем создать заказ','Нужно ввести предлагаемую цену')
-      }else if (!this.data.typestransport.length){
+      }
+      // else if (this.data.price === ''){
+      //   this.loadingCreateOrder = false;
+      //   await this.authService.alert('Не можем создать заказ','Нужно ввести предлагаемую цену')
+      // }
+      else if (!this.data.typestransport.length){
         this.loadingCreateOrder = false;
         await this.authService.alert('Не можем создать заказ','Нужно выбрать тип транспорта')
       }else {

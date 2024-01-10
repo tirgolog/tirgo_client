@@ -21,8 +21,7 @@ export class OrdersPage implements OnInit {
       ) {
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   returnNameTypeTransport(type:number){
     const index = this.authService.typetruck.findIndex(e => +e.id === +type)
@@ -32,9 +31,7 @@ export class OrdersPage implements OnInit {
       return 'Не выбрано'
     }
   }
-
   returnNameCargoType(id:number){
-    console.log(id)
     const index = this.authService.typecargo.findIndex(e => +e.id === +id);
     if (index>=0){
       return this.authService.typecargo[index].name

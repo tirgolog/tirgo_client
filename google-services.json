@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:93382092006:android:b441601657c46ed309c727",
         "android_client_info": {
-          "package_name": "io.tirgo.customer"
+          "package_name": "io.tirgo.client"
         }
       },
       "oauth_client": [],
