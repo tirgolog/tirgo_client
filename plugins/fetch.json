@@ -98,7 +98,9 @@
       "id": "cordova-plugin-camera@^6.0.0"
     },
     "is_top_level": true,
-    "variables": {}
+    "variables": {
+      "ANDROIDX_CORE_VERSION": "1.8.0"
+    }
   },
   "cordova-plugin-file-transfer": {
     "source": {
