@@ -91,8 +91,8 @@ export class AuthPage implements OnInit {
             .then(async (res) => {
                 if (res.status) {
                     await this.authService.setJwt(res.token);
-                    this.loading = false;
-                    //await this.app.checkSession()
+                    // this.loading = false;
+                    // await this.app.checkSession()
                 }else {
                     await this.authService.alert('Ошибка',res.text)
                     this.loading = false;
