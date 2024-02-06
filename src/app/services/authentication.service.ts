@@ -40,7 +40,7 @@ export class AuthenticationService {
 
   }
   goToSupport(){
-    this.iab.create('https://t.me/tirgo_support','_system');
+    this.iab.create('https://t.me/tirgosupportbot','_system');
   }
   addLeadingZeros(num:number) {
     return String(num).padStart(6, '0');
